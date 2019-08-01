@@ -11,3 +11,5 @@
 
 - ERD lucidchart link: https://www.lucidchart.com/documents/edit/8e736751-e9e5-4480-82eb-e948a40e6fe6/0?shared=true&docId=8e736751-e9e5-4480-82eb-e948a40e6fe6
 
+- Github project board: https://github.com/users/benwi1son/projects/1
+
