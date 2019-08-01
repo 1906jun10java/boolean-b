@@ -1,5 +1,10 @@
 package com.revature.beans;
-@
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="EXPESNE")
 public class Expense {
 
 	private int expenseId;
