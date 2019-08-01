@@ -28,12 +28,4 @@
 		<servlet-name>LogoutServlet</servlet-name>
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>ManagerProfileServlet</servlet-name>
-		<servlet-class>com.revature.servlet.ManagerServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ManagerProfileServlet</servlet-name>
-		<url-pattern>/managerprofile</url-pattern>
-	</servlet-mapping>
 </web-app>
