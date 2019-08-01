@@ -1,4 +1,4 @@
-# boolean-b
+# Boolean Boyz
 ## Makers of BudgetBat
 ### Team Members
 - Ben Wilson
