@@ -1,15 +1,30 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="EXPESNE")
+@Table(name="EXPENSE")
 public class Expense {
 
+	@Id 
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="expenseSequence")
+	@SequenceGenerator(allocationSize=1, name="expenseSequence", sequenceName="SQ_EXPENSE_PK")
+	@Column(name="EXPENSE")
 	private int expenseId;
+	
+	@Column(name="USER_ID")
 	private int userId;
+	
+	@Column(name="TYPE")
 	private String type;
+	
+	@Column(name="MONTH")
 	private String month;
 	
 	public Expense() {
