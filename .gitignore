@@ -138,7 +138,7 @@ connection.properties
 database.properties
 */../database.properties
 */../../database.properties
-
+*.properties
 
 
 */src/main/resources/conneciton.properties
