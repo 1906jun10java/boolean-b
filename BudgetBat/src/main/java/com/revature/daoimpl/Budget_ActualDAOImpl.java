@@ -7,44 +7,46 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.revature.beans.Budget_Actual;
 import com.revature.beans.User;
+import com.revature.dao.Budget_ActualDAO;
 import com.revature.dao.UserDAO;
 import com.revature.util.ConnectionUtil;
 
-public class UserDAOImpl implements UserDAO {
+public class Budget_ActualDAOImpl implements Budget_ActualDAO {
 
 	private SessionFactory sf = ConnectionUtil.getSessionFactory();
 
 	@Override
-	public User getUserById(int id) {
-		User u = null;
+	public Budget_Actual getBudget_ActualById(int id) {
+		Budget_Actual ba = null;
 		try (Session s = sf.openSession()) {
 			// Transaction tx = s.beginTransaction();
 			// b = (Book) s.get(Book.class, id); CAN cast to book, but with this overloaded
 			// version it's not necessary
-			u = s.get(User.class, id);
+			ba = s.get(Budget_Actual.class, id);
 			// tx.commit();
 		}
-		return u;
+		return ba;
 	}
 
 	@Override
-	public List<User> getAllUsers() {
-		List<User> userList = new ArrayList<>();
+	public List<Budget_Actual> getAllBudget_Actuals() {
+		List<Budget_Actual> baList = new ArrayList<>();
 		// use a Query
 		try (Session s = sf.openSession()) {
 			// THIS IS HQL... REFERS TO JAVA CLASS BOOK
-			userList = s.createQuery("from User").getResultList();
+			baList = s.createQuery("from User").getResultList();
 		}
-		return userList;
+		return baList;
 	}
 
 	@Override
-	public boolean addUser(User user) {
+	public boolean addBudget_Actual(Budget_Actual budgetActual) {
 		boolean added = false;
 		try (Session s = sf.openSession()) {
 			Transaction tx = s.beginTransaction();
-			s.persist(user);// adds a new record, alternate to save()
+			s.persist(budgetActual);// adds a new record, alternate to save()
 			tx.commit();
 			added = true;
 		}
@@ -52,11 +54,11 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public boolean updateUser(User user) {
+	public boolean updateBudget_Actual(Budget_Actual budgetActual) {
 		boolean updated = false;
 		try (Session s = sf.openSession()) {
 			Transaction tx = s.beginTransaction();
-			s.saveOrUpdate(user);
+			s.saveOrUpdate(budgetActual);
 			tx.commit();
 			updated = true;
 		}
@@ -64,11 +66,11 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public boolean deleteUser(User user) {
+	public boolean deleteBudget_Actual(Budget_Actual budgetActual) {
 		boolean deleted = false;
 		try (Session s = sf.openSession()) {
 			Transaction tx = s.beginTransaction();
-			s.delete(user);
+			s.delete(budgetActual);
 			tx.commit();
 			deleted = true;
 		}
