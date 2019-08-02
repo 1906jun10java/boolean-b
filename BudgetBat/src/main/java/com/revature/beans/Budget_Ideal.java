@@ -1,10 +1,14 @@
 package com.revature.beans;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -17,6 +21,10 @@ public class Budget_Ideal {
 	@SequenceGenerator(allocationSize=1, name="budgetISequence", sequenceName="SQ_BUDGET_I_PK")
 	@Column(name="BUDGET_I_ID")
 	private int budgetIId;
+	
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@JoinColumn(name="USER_ID")
+	private int userId;
 	
 	@Column(name="CREDIT_CARD_INTEREST")
 	private double ccInterest;
@@ -43,9 +51,10 @@ public class Budget_Ideal {
 		super();
 	}
 
-	public Budget_Ideal(double ccInterest, double transportation, double housing, double grocery, double entertainment,
-			double luxury, double other) {
+	public Budget_Ideal(int userId, double ccInterest, double transportation, double housing, double grocery,
+			double entertainment, double luxury, double other) {
 		super();
+		this.userId = userId;
 		this.ccInterest = ccInterest;
 		this.transportation = transportation;
 		this.housing = housing;
@@ -55,10 +64,11 @@ public class Budget_Ideal {
 		this.other = other;
 	}
 
-	public Budget_Ideal(int budgetIId, double ccInterest, double transportation, double housing, double grocery,
-			double entertainment, double luxury, double other) {
+	public Budget_Ideal(int budgetIId, int userId, double ccInterest, double transportation, double housing,
+			double grocery, double entertainment, double luxury, double other) {
 		super();
 		this.budgetIId = budgetIId;
+		this.userId = userId;
 		this.ccInterest = ccInterest;
 		this.transportation = transportation;
 		this.housing = housing;
@@ -72,8 +82,16 @@ public class Budget_Ideal {
 		return budgetIId;
 	}
 
-	public void setBudgetAId(int budgetAId) {
-		this.budgetIId = budgetAId;
+	public void setBudgetIId(int budgetIId) {
+		this.budgetIId = budgetIId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public double getCcInterest() {
@@ -152,6 +170,7 @@ public class Budget_Ideal {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(transportation);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + userId;
 		return result;
 	}
 
@@ -180,14 +199,16 @@ public class Budget_Ideal {
 			return false;
 		if (Double.doubleToLongBits(transportation) != Double.doubleToLongBits(other.transportation))
 			return false;
+		if (userId != other.userId)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Budget_Ideal [budgetIId=" + budgetIId + ", ccInterest=" + ccInterest + ", transportation="
-				+ transportation + ", housing=" + housing + ", grocery=" + grocery + ", entertainment=" + entertainment
-				+ ", luxury=" + luxury + ", other=" + other + "]";
+		return "Budget_Ideal [budgetIId=" + budgetIId + ", userId=" + userId + ", ccInterest=" + ccInterest
+				+ ", transportation=" + transportation + ", housing=" + housing + ", grocery=" + grocery
+				+ ", entertainment=" + entertainment + ", luxury=" + luxury + ", other=" + other + "]";
 	}
 
 }

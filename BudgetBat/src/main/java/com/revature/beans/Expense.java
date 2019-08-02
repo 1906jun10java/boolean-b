@@ -1,10 +1,14 @@
 package com.revature.beans;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -18,7 +22,8 @@ public class Expense {
 	@Column(name="EXPENSE")
 	private int expenseId;
 	
-	@Column(name="USER_ID")
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@JoinColumn(name="USER_ID")
 	private int userId;
 	
 	@Column(name="TYPE")
@@ -30,7 +35,7 @@ public class Expense {
 	public Expense() {
 		super();
 	}
-	
+
 	public Expense(int userId, String type, String month) {
 		super();
 		this.userId = userId;
