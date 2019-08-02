@@ -18,6 +18,9 @@ public class Expense {
 	@Column(name="EXPENSE")
 	private int expenseId;
 	
+	@Column(name="EXPENSE_AMOUNT")
+	private double expenseAmount;
+	
 	@Column(name="USER_ID")
 	private int userId;
 	
@@ -26,21 +29,16 @@ public class Expense {
 	
 	@Column(name="MONTH")
 	private String month;
-	
+
 	public Expense() {
 		super();
-	}
-	
-	public Expense(int userId, String type, String month) {
-		super();
-		this.userId = userId;
-		this.type = type;
-		this.month = month;
+		// TODO Auto-generated constructor stub
 	}
 
-	public Expense(int expenseId, int userId, String type, String month) {
+	public Expense(int expenseId, double expenseAmount, int userId, String type, String month) {
 		super();
 		this.expenseId = expenseId;
+		this.expenseAmount = expenseAmount;
 		this.userId = userId;
 		this.type = type;
 		this.month = month;
@@ -52,6 +50,14 @@ public class Expense {
 
 	public void setExpenseId(int expenseId) {
 		this.expenseId = expenseId;
+	}
+
+	public double getExpenseAmount() {
+		return expenseAmount;
+	}
+
+	public void setExpenseAmount(double expenseAmount) {
+		this.expenseAmount = expenseAmount;
 	}
 
 	public int getUserId() {
@@ -82,6 +88,9 @@ public class Expense {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(expenseAmount);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + expenseId;
 		result = prime * result + ((month == null) ? 0 : month.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
@@ -98,6 +107,8 @@ public class Expense {
 		if (getClass() != obj.getClass())
 			return false;
 		Expense other = (Expense) obj;
+		if (Double.doubleToLongBits(expenseAmount) != Double.doubleToLongBits(other.expenseAmount))
+			return false;
 		if (expenseId != other.expenseId)
 			return false;
 		if (month == null) {
@@ -117,7 +128,14 @@ public class Expense {
 
 	@Override
 	public String toString() {
-		return "Expense [expenseId=" + expenseId + ", userId=" + userId + ", type=" + type + ", month=" + month + "]";
+		return "Expense [expenseId=" + expenseId + ", expenseAmount=" + expenseAmount + ", userId=" + userId + ", type="
+				+ type + ", month=" + month + "]";
 	}
 	
+	
 }
+
+
+	
+	
+
