@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.beans.User;
+import com.revature.dao.UserDao;
+import com.revature.dao.UserDaoImpl;
 
 public class UserService {
 	public static ArrayList<String> UsersIndex = new ArrayList<>();
@@ -20,7 +22,7 @@ public class UserService {
 
 	public User getUserByUsername(String username) {
 		System.out.println("5 - running getUserByUsername from UserService");
-		return forEveryServiceOneDaoObject.getUserByUsername(username);
+		return forEveryServiceOneDaoObject.getUserByEmail(username);
 	}
 
 	public boolean createUser(User user) {
