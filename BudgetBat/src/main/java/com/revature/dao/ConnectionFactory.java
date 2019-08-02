@@ -33,7 +33,6 @@ public class ConnectionFactory {
 
 		try {
 			String cp = "database.properties";
-
 			InputStream stream = loader.getResourceAsStream(cp);
 			prop.load(stream);
 			Class.forName(prop.getProperty("driver"));
