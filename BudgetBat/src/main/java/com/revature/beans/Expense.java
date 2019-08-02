@@ -24,7 +24,7 @@ public class Expense {
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	@JoinColumn(name="USER_ID")
-	private int userId;
+	private User userId;
 	
 	@Column(name="TYPE")
 	private String type;
@@ -36,14 +36,14 @@ public class Expense {
 		super();
 	}
 
-	public Expense(int userId, String type, String month) {
+	public Expense(User userId, String type, String month) {
 		super();
 		this.userId = userId;
 		this.type = type;
 		this.month = month;
 	}
 
-	public Expense(int expenseId, int userId, String type, String month) {
+	public Expense(int expenseId, User userId, String type, String month) {
 		super();
 		this.expenseId = expenseId;
 		this.userId = userId;
@@ -59,11 +59,11 @@ public class Expense {
 		this.expenseId = expenseId;
 	}
 
-	public int getUserId() {
+	public User getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(User userId) {
 		this.userId = userId;
 	}
 
@@ -90,7 +90,7 @@ public class Expense {
 		result = prime * result + expenseId;
 		result = prime * result + ((month == null) ? 0 : month.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + userId;
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
@@ -115,7 +115,10 @@ public class Expense {
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
-		if (userId != other.userId)
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
 			return false;
 		return true;
 	}

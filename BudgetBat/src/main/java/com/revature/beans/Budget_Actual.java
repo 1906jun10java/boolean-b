@@ -24,7 +24,7 @@ public class Budget_Actual {
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	@JoinColumn(name="USER_ID")
-	private int userId;
+	private User userId;
 	
 	@Column(name="CREDIT_CARD_INTEREST")
 	private double ccInterest;
@@ -51,7 +51,7 @@ public class Budget_Actual {
 		super();
 	}
 
-	public Budget_Actual(int userId, double ccInterest, double transportation, double housing, double grocery,
+	public Budget_Actual(User userId, double ccInterest, double transportation, double housing, double grocery,
 			double entertainment, double luxury, double other) {
 		super();
 		this.userId = userId;
@@ -64,7 +64,7 @@ public class Budget_Actual {
 		this.other = other;
 	}
 
-	public Budget_Actual(int budgetAId, int userId, double ccInterest, double transportation, double housing,
+	public Budget_Actual(int budgetAId, User userId, double ccInterest, double transportation, double housing,
 			double grocery, double entertainment, double luxury, double other) {
 		super();
 		this.budgetAId = budgetAId;
@@ -86,11 +86,11 @@ public class Budget_Actual {
 		this.budgetAId = budgetAId;
 	}
 
-	public int getUserId() {
+	public User getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(User userId) {
 		this.userId = userId;
 	}
 
@@ -170,7 +170,7 @@ public class Budget_Actual {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(transportation);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + userId;
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
@@ -199,7 +199,10 @@ public class Budget_Actual {
 			return false;
 		if (Double.doubleToLongBits(transportation) != Double.doubleToLongBits(other.transportation))
 			return false;
-		if (userId != other.userId)
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
 			return false;
 		return true;
 	}
