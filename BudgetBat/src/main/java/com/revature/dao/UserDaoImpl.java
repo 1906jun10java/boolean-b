@@ -6,34 +6,54 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.revature.beans.User;
 import com.revature.service.UserService;
 
-public class UserDaoImpl implements UserDao{
-public static ConnectionFactory cFS = ConnectionFactory.getInstance();
+@Repository(value="userDao")
+@Transactional
+public class UserDaoImpl implements UserDao {
+	public static ConnectionFactory cFS = ConnectionFactory.getInstance();
+	private SessionFactory sessionFactory;
 	
+	
+	// For constructor injection
+	@Autowired
+	public UserDaoImpl(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 	User user = new User();
 	private ArrayList<User> allUsers = new ArrayList<>();
-	
+
 	public UserDaoImpl() {
 		System.out.println("Running UserDaoImpl in UserDaoImpl");
 	}
 
 	@Override
 	public User getUserByEmail(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return sessionFactory.getCurrentSession().get(User.class, EMAIL);
 	}
 
 	@Override
 	public List<User> getUsers() {
 		System.out.println("7 - running getUsers in UserDaoImpl");
-		Connection connection = cFS.getConnection();
-		Statement statement = null;
-		//TODO Use new way to implement getUsers()
 		
-		//Old way of using vanilla java for reference
+		Session s = sessionFactory.getCurrentSession();
+		List<User> users = new ArrayList<>();
+		return s.createQuery("form User").getResultList();
+
+		// TODO Use new way to implement getUsers()
+
+		// Old way of using vanilla java for reference
 //		String query = "SELECT * FROM USERS";
+//		Connection connection = cFS.getConnection();
+//		Statement statement = null;
 //
 //		try {
 //			statement = connection.createStatement();
@@ -78,13 +98,13 @@ public static ConnectionFactory cFS = ConnectionFactory.getInstance();
 	@Override
 	public void updateUser(User user) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteUser(User user) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
