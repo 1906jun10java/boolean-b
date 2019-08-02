@@ -21,7 +21,7 @@ public class OrmConfiguration {
 	@Bean
 	public DataSource dataSource() {
 			DriverManagerDataSource dataSource = new DriverManagerDataSource();
-			dataSource.setUrl("jdbc:h2:mem:testdb");
+			dataSource.setUrl("jdbc:h2:mem:testdb=-1");
 			// this is an in memory database
 			dataSource.setDriverClassName("org.h2.Driver");
 			return dataSource;
@@ -43,6 +43,7 @@ public class OrmConfiguration {
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
 		//TODO add oracle dialect and maybe remove h2 after testing
 //		hibernateProperties.setProperty("hibernate.dialect", "ORACLE DIALECT");
+		hibernateProperties.setProperty("hibernate.show-sql", "true");
 		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 		
 		return hibernateProperties;

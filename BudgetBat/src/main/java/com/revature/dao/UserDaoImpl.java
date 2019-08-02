@@ -29,15 +29,15 @@ public class UserDaoImpl implements UserDao {
 		this.sessionFactory = sessionFactory;
 	}
 	User user = new User();
-	private ArrayList<User> allUsers = new ArrayList<>();
+	private ArrayList<User> users = new ArrayList<>();
 
 	public UserDaoImpl() {
 		System.out.println("Running UserDaoImpl in UserDaoImpl");
 	}
 
 	@Override
-	public User getUserByEmail(String name) {
-		return sessionFactory.getCurrentSession().get(User.class, EMAIL);
+	public User getUserByEmail(String email) {
+		return sessionFactory.getCurrentSession().get(User.class, email);
 	}
 
 	@Override
@@ -80,7 +80,6 @@ public class UserDaoImpl implements UserDao {
 //			}
 //		}
 //		return allUsers;
-		return null;
 	}
 
 	@Override
