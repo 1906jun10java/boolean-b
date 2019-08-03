@@ -6,7 +6,7 @@
     </head>
     <body>
     <div style="text-align:center" class = "loginWidth">
-    <form action="/action_page.php">
+    <form modelAttribute="login" action="loginprocess" method="post">
     <div class="imgcontainer">
       
       
@@ -16,12 +16,12 @@
   
     <div class="container">
       <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
+      <input type="text" path="username" placeholder="Enter Username" name="userName" required>
   
       <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <input type="password" path="password" placeholder="Enter Password" name="passWord" required>
           
-      <button type="submit">Login</button>
+      <button type="submit" name = "login">Login</button>
       
     </div>
   

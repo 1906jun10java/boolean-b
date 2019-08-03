@@ -16,17 +16,17 @@ import com.revature.beans.User;
 import com.revature.service.AuthenticationService;
 import com.revature.service.UserService;
 @Controller
-@SessionAttributes("User")
+@RequestMapping(value="/login")
 public class LoginController {
 	
 	@Autowired
 	UserService us;
 	AuthenticationService as = new AuthenticationService();
 	
-	@RequestMapping(value ="/login", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView viewLogin(HttpServletRequest req, HttpServletResponse resp) {
-		ModelAndView mav = new ModelAndView("login");
-		mav.addObject("login", new Credentials());
+		ModelAndView mav = new ModelAndView("index");
+		mav.addObject("index", new Credentials());
 		return mav;
 	}
 	@RequestMapping(value ="/loginProcess", method= RequestMethod.POST)
@@ -34,10 +34,10 @@ public class LoginController {
 		ModelAndView mav =  null;
 		User u =  as.authenticateUser(creds);
 		if(u != null) {
-			mav =  new ModelAndView("homepage");
+			mav =  new ModelAndView("index");
 			mav.addObject("firstname", u.getFirstName());
 		}else {
-			mav = new ModelAndView("login");
+			mav = new ModelAndView("registration");
 			mav.addObject("message", "Invalid credentials");
 		}
 		return mav;
