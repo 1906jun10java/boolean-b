@@ -135,6 +135,11 @@ testem.log
 connection.properties
 */conneciton.properties
 */database.properties
+database.properties
+*/../database.properties
+*/../../database.properties
+*.properties
+
 
 */src/main/resources/conneciton.properties
 */src/main/resources/database.properties
