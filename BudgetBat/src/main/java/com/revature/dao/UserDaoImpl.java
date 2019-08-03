@@ -1,9 +1,5 @@
 package com.revature.dao;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -14,22 +10,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.revature.beans.User;
-import com.revature.service.UserService;
 
-@Repository(value="userDao")
+@Repository(value = "userDao")
 @Transactional
 public class UserDaoImpl implements UserDao {
 	public static ConnectionFactory cFS = ConnectionFactory.getInstance();
 	private SessionFactory sessionFactory;
-	
-	
+
 	// For constructor injection
 	@Autowired
 	public UserDaoImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	User user = new User();
-	private ArrayList<User> users = new ArrayList<>();
+
+	
 
 	public UserDaoImpl() {
 		System.out.println("Running UserDaoImpl in UserDaoImpl");
@@ -43,14 +37,13 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<User> getUsers() {
 		System.out.println("7 - running getUsers in UserDaoImpl");
-		
 		Session s = sessionFactory.getCurrentSession();
-		List<User> users = new ArrayList<>();
-		return s.createQuery("form User").getResultList();
+		return s.createQuery("from User").getResultList();
+	}
 
-		// TODO Use new way to implement getUsers()
+	// TODO Use new way to implement getUsers()
 
-		// Old way of using vanilla java for reference
+	// Old way of using vanilla java for reference
 //		String query = "SELECT * FROM USERS";
 //		Connection connection = cFS.getConnection();
 //		Statement statement = null;
@@ -80,30 +73,28 @@ public class UserDaoImpl implements UserDao {
 //			}
 //		}
 //		return allUsers;
-	}
 
 	@Override
 	public List<User> getUsersByIncomeLevel() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean createUser(User user) {
-		// TODO Auto-generated method stub
-		return false;
+	public void createUser(User user) {
+		sessionFactory.getCurrentSession().persist(user);
 	}
+
+	
 
 	@Override
 	public void updateUser(User user) {
-		// TODO Auto-generated method stub
+		sessionFactory.getCurrentSession().update(user);
 
 	}
 
 	@Override
 	public void deleteUser(User user) {
-		// TODO Auto-generated method stub
-
+		sessionFactory.getCurrentSession().delete(user);
 	}
 
 }

@@ -1,0 +1,46 @@
+package com.revature.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.revature.beans.Credentials;
+import com.revature.beans.User;
+import com.revature.service.AuthenticationService;
+import com.revature.service.UserService;
+@Controller
+@SessionAttributes("User")
+public class LoginController {
+	
+	@Autowired
+	UserService us;
+	AuthenticationService as = new AuthenticationService();
+	
+	@RequestMapping(value ="/login", method = RequestMethod.GET)
+	public ModelAndView viewLogin(HttpServletRequest req, HttpServletResponse resp) {
+		ModelAndView mav = new ModelAndView("login");
+		mav.addObject("login", new Credentials());
+		return mav;
+	}
+	@RequestMapping(value ="/loginProcess", method= RequestMethod.POST)
+	public ModelAndView loginProcess(HttpServletRequest req, HttpServletResponse resp, @ModelAttribute("Credentials") Credentials creds) {
+		ModelAndView mav =  null;
+		User u =  as.authenticateUser(creds);
+		if(u != null) {
+			mav =  new ModelAndView("homepage");
+			mav.addObject("firstname", u.getFirstName());
+		}else {
+			mav = new ModelAndView("login");
+			mav.addObject("message", "Invalid credentials");
+		}
+		return mav;
+	}
+
+}

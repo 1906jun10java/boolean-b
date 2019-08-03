@@ -24,7 +24,7 @@ public class UserControllor {
 		private UserService userService;
 		
 		@Autowired // setter injection
-		public void setFlashcardService(UserService userService) {
+		public void UserService(UserService userService) {
 			this.userService = userService;
 		}
 		
@@ -35,7 +35,7 @@ public class UserControllor {
 		
 		@RequestMapping(value="/{email}", method=RequestMethod.GET)
 		public ResponseEntity<User> getFlashcardById(@PathVariable String email) {
-			User f = UserService.getUserByEmail(email);
+			User f = userService.getUserByEmail(email);
 			if (f == null) {
 				return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 			} else {
