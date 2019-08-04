@@ -14,7 +14,7 @@ import com.revature.beans.User;
 @Repository(value = "userDao")
 @Transactional
 public class UserDaoImpl implements UserDao {
-	public static ConnectionFactory cFS = ConnectionFactory.getInstance();
+//	public static ConnectionFactory cFS = ConnectionFactory.getInstance();
 	private SessionFactory sessionFactory;
 
 	// For constructor injection

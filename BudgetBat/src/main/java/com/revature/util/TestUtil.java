@@ -4,6 +4,8 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import org.hibernate.criterion.Projections;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -17,9 +19,11 @@ public class TestUtil {
 	
 	@Bean
 	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setUrl("jdbc:oracle:thin:@learningdb.comtbe7swwpo.us-east-1.rds.amazonaws.com:1521:ORCL");
+//		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		final BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+		dataSource.setUrl("jdbc:oracle:thin:@learningdb.comtbe7swwpo.us-east-1.rds.amazonaws.com:1521:ORCL");
+//		dataSource.setUsername(Projections.checkNotNull(env.getProperty("DEMO_DB_USERNAME")));
 		// this in-memory db does not require credentials
 		return dataSource;
 	}

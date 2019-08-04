@@ -4,27 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.beans.User;
 import com.revature.dao.UserDao;
 import com.revature.dao.UserDaoImpl;
 
+@Service
 public class UserService {
 	public static ArrayList<String> UsersIndex = new ArrayList<>();
 
-	
-	
 	private UserDao userDao;
-	
+
 	@Autowired
 	public UserService(UserDao userDao) {
 		this.userDao = userDao;
 	}
-	
-			
+
 	public UserService() {
 	}
-	
+
 	public List<User> getUsers() {
 		System.out.println("running getUsers from UserService");
 		return this.userDao.getUsers();
@@ -41,7 +40,7 @@ public class UserService {
 		System.out.println("running createUser from UserService");
 		userDao.createUser(user);
 	}
-	
+
 //	public List<User> getUsers() {
 //		ArrayList<User> users = ArrayList<>();
 //		User user = new User();

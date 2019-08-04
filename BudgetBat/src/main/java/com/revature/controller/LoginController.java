@@ -15,8 +15,8 @@ import com.revature.beans.Credentials;
 import com.revature.beans.User;
 import com.revature.service.AuthenticationService;
 import com.revature.service.UserService;
-@Controller
 
+@Controller
 public class LoginController {
 	
 	@Autowired
