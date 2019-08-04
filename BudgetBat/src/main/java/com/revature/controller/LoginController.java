@@ -16,16 +16,16 @@ import com.revature.beans.User;
 import com.revature.service.AuthenticationService;
 import com.revature.service.UserService;
 @Controller
-@RequestMapping(value="/login")
+
 public class LoginController {
 	
 	@Autowired
 	UserService us;
 	AuthenticationService as = new AuthenticationService();
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public ModelAndView viewLogin(HttpServletRequest req, HttpServletResponse resp) {
-		ModelAndView mav = new ModelAndView("index");
+		ModelAndView mav = new ModelAndView();
 		mav.addObject("index", new Credentials());
 		return mav;
 	}

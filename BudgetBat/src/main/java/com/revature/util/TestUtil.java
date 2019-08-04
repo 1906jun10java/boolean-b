@@ -18,8 +18,8 @@ public class TestUtil {
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setUrl("jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1");
-		dataSource.setDriverClassName("org.h2.Driver");
+		dataSource.setUrl("jdbc:oracle:thin:@learningdb.comtbe7swwpo.us-east-1.rds.amazonaws.com:1521:ORCL");
+		dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		// this in-memory db does not require credentials
 		return dataSource;
 	}
@@ -37,7 +37,7 @@ public class TestUtil {
 		Properties hibernateProperties = new Properties();
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 		hibernateProperties.setProperty("hibernate.show-sql", "true");
-		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.OracleDialect");
 		
 		return hibernateProperties;
 	}
