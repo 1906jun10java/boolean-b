@@ -23,12 +23,15 @@ public class TestUtil {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 //		final BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		dataSource.setUrl(System.getenv("DEMO_DB_URL"));
-		dataSource.setUsername(System.getenv("DEMO_DB_USERNAME"));
-		dataSource.setUsername(System.getenv("DEMO_DB_PASSWORD"));
-		System.out.println(System.getenv("DEMO_DB_URL"));
-		System.out.println(System.getenv("DEMO_DB_USERNAME"));
-		System.out.println(System.getenv("DEMO_DB_PASSWORD"));
+		dataSource.setUrl("jdbc:oracle:thin:@learningdb.comtbe7swwpo.us-east-1.rds.amazonaws.com");
+		dataSource.setUsername("GreenSnail");
+		dataSource.setUsername("standbird");
+//		dataSource.setUrl(System.getenv("DEMO_DB_URL"));
+//		dataSource.setUsername(System.getenv("DEMO_DB_USERNAME"));
+//		dataSource.setUsername(System.getenv("DEMO_DB_PASSWORD"));
+//		System.out.println(System.getenv("DEMO_DB_URL"));
+//		System.out.println(System.getenv("DEMO_DB_USERNAME"));
+//		System.out.println(System.getenv("DEMO_DB_PASSWORD"));
 		return dataSource;
 	}
 
@@ -43,8 +46,8 @@ public class TestUtil {
 
 	private final Properties hibernateProperties() {
 		Properties hibernateProperties = new Properties();
-		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-		hibernateProperties.setProperty("hibernate.show-sql", "true");
+		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
+		hibernateProperties.setProperty("hibernate.show_sql", "true");
 		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.OracleDialect");
 
 		return hibernateProperties;
