@@ -12,7 +12,7 @@ import com.revature.dao.UserDaoImpl;
 public class UserService {
 	public static ArrayList<String> UsersIndex = new ArrayList<>();
 
-	private UserDao forEveryServiceOneDaoObject = new UserDaoImpl();
+	
 	
 	private UserDao userDao;
 	
@@ -37,9 +37,9 @@ public class UserService {
 //		return forEveryServiceOneDaoObject.getUserByEmail(username);
 	}
 
-	public boolean createUser(User user) {
+	public void createUser(User user) {
 		System.out.println("running createUser from UserService");
-		return forEveryServiceOneDaoObject.createUser(user);
+		userDao.createUser(user);
 	}
 	
 //	public List<User> getUsers() {
