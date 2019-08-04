@@ -19,13 +19,13 @@ public class OrmConfiguration {
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setUrl(System.getenv("DEMO_DB_URL"));
-		System.out.println(System.getenv("DEMO_DB_URL"));
-		dataSource.setUsername(System.getenv("DEMO_DB_USERNAME"));
-		System.out.println(System.getenv("DEMO_DB_USERNAME"));
-		dataSource.setPassword(System.getenv("DEMO_DB_PASSWORD"));
-		System.out.println(System.getenv("DEMO_DB_PASSWORD"));
 		dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+		dataSource.setUrl(System.getenv("DEMO_DB_URL"));
+//		System.out.println(System.getenv("DEMO_DB_URL"));
+		dataSource.setUsername(System.getenv("DEMO_DB_USERNAME"));
+//		System.out.println(System.getenv("DEMO_DB_USERNAME"));
+		dataSource.setPassword(System.getenv("DEMO_DB_PASSWORD"));
+//		System.out.println(System.getenv("DEMO_DB_PASSWORD"));
 		return dataSource;
 	}
 	

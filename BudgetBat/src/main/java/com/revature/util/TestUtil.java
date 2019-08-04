@@ -13,21 +13,25 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 @Configuration
 @EnableTransactionManagement
 public class TestUtil {
-	
+
 	@Bean
 	public DataSource dataSource() {
-//		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		final BasicDataSource dataSource = new BasicDataSource();
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//		final BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		dataSource.setUrl("jdbc:oracle:thin:@learningdb.comtbe7swwpo.us-east-1.rds.amazonaws.com:1521:ORCL");
-//		dataSource.setUsername(Projections.checkNotNull(env.getProperty("DEMO_DB_USERNAME")));
-		// this in-memory db does not require credentials
+		dataSource.setUrl(System.getenv("DEMO_DB_URL"));
+		dataSource.setUsername(System.getenv("DEMO_DB_USERNAME"));
+		dataSource.setUsername(System.getenv("DEMO_DB_PASSWORD"));
+		System.out.println(System.getenv("DEMO_DB_URL"));
+		System.out.println(System.getenv("DEMO_DB_USERNAME"));
+		System.out.println(System.getenv("DEMO_DB_PASSWORD"));
 		return dataSource;
 	}
-	
+
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -36,16 +40,16 @@ public class TestUtil {
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
 	}
-	
+
 	private final Properties hibernateProperties() {
 		Properties hibernateProperties = new Properties();
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 		hibernateProperties.setProperty("hibernate.show-sql", "true");
 		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.OracleDialect");
-		
+
 		return hibernateProperties;
 	}
-	
+
 	@Bean
 	public PlatformTransactionManager hibernateTransactionManager() {
 		HibernateTransactionManager transactionManager = new HibernateTransactionManager();

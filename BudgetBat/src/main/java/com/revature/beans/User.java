@@ -9,7 +9,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="USER")
+@Table(name="USER_BAT")
 public class User {
 	
 	@Id 
